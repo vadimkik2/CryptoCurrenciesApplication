@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "41d3ddf2-5c18-4883-aebb-8b33049f6ae8",
+		"name": "currency collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18651180"
+	},
+	"item": [
+		{
+			"name": "currencyMinPrice",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "CSV",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "CurrencyByName",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "CurrencyWithMaxPrice",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
