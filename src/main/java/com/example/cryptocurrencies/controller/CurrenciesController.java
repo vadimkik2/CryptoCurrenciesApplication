@@ -1,5 +1,6 @@
 package com.example.cryptocurrencies.controller;
 
+import com.example.cryptocurrencies.dto.Dto;
 import com.example.cryptocurrencies.service.CurrencyService;
 import com.example.cryptocurrencies.service.ExportService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +45,13 @@ public class CurrenciesController {
     }
 
     @GetMapping("/csv")
-    public void getCsv(HttpServletResponse response) throws IOException {
+    public void getCsv(HttpServletResponse response, @RequestBody Dto dto) {
         response.setContentType("text/csv");
         response.addHeader("Content-Disposition","attachment; filename=\"currencies.csv\"");
-        csvExportService.writePriceToCsv(response.getWriter());
+        try {
+            csvExportService.writePriceToCsv(response.getWriter(),dto);
+        } catch (IOException e) {
+            throw new RuntimeException("something goes wrong", e);
+        }
     }
 }

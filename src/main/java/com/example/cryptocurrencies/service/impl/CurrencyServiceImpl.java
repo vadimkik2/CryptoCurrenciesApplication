@@ -7,6 +7,7 @@ import com.example.cryptocurrencies.repository.CurrencyRepository;
 import com.example.cryptocurrencies.service.CurrencyService;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,22 +26,22 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     @Override
     public String getMinPriceByName(String name) {
-        CurrencyPrice firstByNameOrderByPriceAsc = currencyRepository
+        Optional<CurrencyPrice> orderByPriceAsc = currencyRepository
                 .findFirstByNameOrderByPriceAsc(name);
-        if (firstByNameOrderByPriceAsc == null) {
+        if (orderByPriceAsc.isEmpty()) {
             throw new RuntimeException("Currency name is invalid");
         }
-        return firstByNameOrderByPriceAsc.getPrice().toString();
+        return orderByPriceAsc.get().getPrice().toString();
     }
 
     @Override
     public String getMaxPriceByName(String name) {
-        CurrencyPrice firstByNameOrderByPriceDesc = currencyRepository
+        Optional<CurrencyPrice> firstByNameOrderByPriceDesc = currencyRepository
                 .findFirstByNameOrderByPriceDesc(name);
-        if (firstByNameOrderByPriceDesc == null) {
+        if (firstByNameOrderByPriceDesc.isEmpty()) {
             throw new RuntimeException("Currency name is invalid");
         }
-        return firstByNameOrderByPriceDesc.getPrice().toString();
+        return firstByNameOrderByPriceDesc.get().getPrice().toString();
     }
 
     @Override
@@ -52,8 +53,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
         result.put("Currencies",page.getContent());
         result.put("CurrentPage",page.getNumber());
-        result.put("totalItems:",page.getTotalElements());
-        result.put("Pages:",page.getTotalPages());
+        result.put("TotalItems",page.getTotalElements());
+        result.put("Pages",page.getTotalPages());
         return result;
     }
 }
