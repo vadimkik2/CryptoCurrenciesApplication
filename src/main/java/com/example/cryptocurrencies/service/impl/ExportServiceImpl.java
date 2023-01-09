@@ -36,11 +36,11 @@ public class ExportServiceImpl implements ExportService {
     }
 
     private PriceDto creatFromRepository(String name) {
-       if(currencyRepository.findFirstByNameOrderByPriceDesc(name).isEmpty() ||
-          currencyRepository.findFirstByNameOrderByPriceAsc(name).isEmpty()) {
-           throw new RuntimeException("Currency name is invalid or "
+        if (currencyRepository.findFirstByNameOrderByPriceDesc(name).isEmpty()
+                || currencyRepository.findFirstByNameOrderByPriceAsc(name).isEmpty()) {
+            throw new RuntimeException("Currency name is invalid or "
                    + "this currency is not in the database");
-       }
+        }
         return PriceDto.builder()
                 .name(name)
                 .minPrice(currencyRepository.findFirstByNameOrderByPriceDesc(name).get().getPrice())
