@@ -1,6 +1,6 @@
 package com.example.cryptocurrencies.controller;
 
-import com.example.cryptocurrencies.dto.Dto;
+import com.example.cryptocurrencies.dto.CurrencyListDto;
 import com.example.cryptocurrencies.service.CurrencyService;
 import com.example.cryptocurrencies.service.ExportService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,7 +45,7 @@ public class CurrenciesController {
     }
 
     @GetMapping("/csv")
-    public void getCsv(HttpServletResponse response, @RequestBody Dto dto) {
+    public void getCsv(HttpServletResponse response, @RequestBody CurrencyListDto dto) {
         response.setContentType("text/csv");
         response.addHeader("Content-Disposition","attachment; filename=\"currencies.csv\"");
         try {

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Dto {
+public class CurrencyListDto {
     private List<String> name;
 }

@@ -29,7 +29,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         Optional<CurrencyPrice> orderByPriceAsc = currencyRepository
                 .findFirstByNameOrderByPriceAsc(name);
         if (orderByPriceAsc.isEmpty()) {
-            throw new RuntimeException("Currency name is invalid");
+            throw new RuntimeException("Currency name is invalid or "
+                    + "this currency is not in the database");
         }
         return orderByPriceAsc.get().getPrice().toString();
     }
@@ -39,7 +40,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         Optional<CurrencyPrice> firstByNameOrderByPriceDesc = currencyRepository
                 .findFirstByNameOrderByPriceDesc(name);
         if (firstByNameOrderByPriceDesc.isEmpty()) {
-            throw new RuntimeException("Currency name is invalid");
+            throw new RuntimeException("Currency name is invalid or "
+                    + "this currency is not in the database");
         }
         return firstByNameOrderByPriceDesc.get().getPrice().toString();
     }
@@ -49,7 +51,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         Map<String,Object> result = new HashMap<>();
         Page<CurrencyPrice> page = currencyRepository.findAllByName(name,pageable);
         if (page == null) {
-            throw new RuntimeException("Currency name is invalid");
+            throw new RuntimeException("Currency name is invalid or "
+                    + "this currency is not in the database");
         }
         result.put("Currencies",page.getContent());
         result.put("CurrentPage",page.getNumber());
