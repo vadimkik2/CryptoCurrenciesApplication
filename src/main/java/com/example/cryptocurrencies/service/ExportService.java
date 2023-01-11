@@ -1,8 +1,8 @@
 package com.example.cryptocurrencies.service;
 
-import com.example.cryptocurrencies.dto.CurrencyListDto;
 import java.io.Writer;
+import java.util.List;
 
 public interface ExportService {
-    void writePriceToCsv(Writer writer, CurrencyListDto dto);
+    void writePriceToCsv(Writer writer, List<String> name);
 }
